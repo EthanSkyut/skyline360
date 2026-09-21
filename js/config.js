@@ -14,8 +14,8 @@ window.SKYLINE_CONFIG = {
     instagram: "skyline360utah",
     serviceArea: "Utah County · Salt Lake County · Park City",
     baseCity: "Provo, Utah",
-    part107: false,                         // UNCONFIRMED at launch (2026-09-20). Set true once your FAA Part 107 certificate is issued
-    insured: false,                         // UNCONFIRMED at launch (2026-09-20). Set true once your drone liability policy is active
+    part107: true,                          // confirmed by Ethan 2026-09-20 (drones FAA-registered too)
+    insured: false,                         // no policy yet (2026-09-20). Set true once your drone liability policy is active
   },
 
   // Booking: paste a Calendly / Cal.com link to show a "Pick a time" button.
@@ -147,6 +147,12 @@ window.SKYLINE_CONFIG = {
       q: "Are you licensed and insured to fly commercially?",
       requires: ["part107", "insured"],   // hidden unless both toggles above are true
       a: "Yes. Every flight is flown by an FAA Part 107 certified remote pilot with active drone liability insurance. Certificates of insurance are available for your brokerage, HOA, or job site on request.",
+    },
+    {
+      q: "Are you licensed to fly commercially?",
+      requires: ["part107"],
+      unless: ["insured"],                 // replaced by the licensed-and-insured answer once insured is true
+      a: "Yes. Every flight is flown by an FAA Part 107 certified remote pilot, and every aircraft is registered with the FAA. Near airports we get FAA airspace authorization (LAANC) before we fly.",
     },
     {
       q: "Can you fly near Provo or Salt Lake City airports?",

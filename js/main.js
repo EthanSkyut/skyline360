@@ -469,7 +469,9 @@
   /* ---------------- FAQ ---------------- */
   const faqList = $("#faq-list");
   // An FAQ that asserts a credential only shows while that credential's toggle is on.
-  C.faqs.filter((f) => (f.requires || []).every((k) => b[k])).forEach((f, i) => {
+  C.faqs
+    .filter((f) => (f.requires || []).every((k) => b[k]) && (f.unless || []).every((k) => !b[k]))
+    .forEach((f, i) => {
     const d = el("details", "faq-item reveal");
     if (i === 0) d.open = true;
     d.append(el("summary", null, f.q), el("p", null, f.a));
