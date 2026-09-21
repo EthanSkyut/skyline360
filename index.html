@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Skyline 360 | Utah Drone Video, Aerial Photography &amp; 360° Tours</title>
+  <meta name="description" content="Cinematic drone video, aerial photography, FPV fly-throughs, 3D models and interactive 360° tours for Utah real estate, builders and businesses. Serving Utah County, Salt Lake County and Park City.">
+  <meta name="theme-color" content="#0a0a0b">
+  <meta property="og:title" content="Skyline 360 | Aerial cinema for places worth showing off">
+  <meta property="og:description" content="Drone video, aerial photos and immersive 360° experiences across the Wasatch Front.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://skyline360utah.com/">
+  <meta property="og:image" content="https://skyline360utah.com/assets/video/reel/poster.jpg">
+  <link rel="canonical" href="https://skyline360utah.com/">
+  <link rel="icon" href="assets/brand/mark.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Skyline 360",
+    "url": "https://skyline360utah.com/",
+    "legalName": "Skyline 360 LLC",
+    "email": "ethandaugherty03@gmail.com",
+    "founder": {"@type": "Person", "name": "Ethan Daugherty"},
+    "description": "Drone videography, aerial photography, FPV fly-throughs, 3D models and 360° tours for real estate, construction and businesses.",
+    "areaServed": ["Utah County, UT", "Salt Lake County, UT", "Park City, UT"],
+    "sameAs": ["https://www.instagram.com/skyline360utah/"]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header" id="top">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="Skyline 360 home">
+        <img src="assets/brand/logo.svg" alt="Skyline 360" class="brand-logo">
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="#work">Work</a>
+        <a href="#experience">360° Experience</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a class="btn btn-accent btn-sm header-cta" href="#book">Book a Free Consult</a>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+        <span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu" hidden>
+      <a href="#work">Work</a>
+      <a href="#experience">360° Experience</a>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn btn-accent" href="#book">Book a Free Consult</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ============ HERO: FOOTAGE REEL ============ -->
+    <section class="hero" aria-label="Featured footage">
+      <div class="hero-media" id="hero-media">
+        <canvas class="hero-placeholder" id="hero-placeholder" aria-hidden="true"></canvas>
+      </div>
+      <div class="hero-shade" aria-hidden="true"></div>
+
+      <div class="hero-content wrap">
+        <p class="eyebrow reveal">Drone Video · Aerial Photo · 360° · 3D</p>
+        <h1 class="hero-title reveal">Make them <em>stop scrolling.</em></h1>
+        <p class="hero-sub reveal">Cinematic aerial footage that sells Utah homes, builds, and businesses before anyone walks through the door.</p>
+        <div class="hero-actions reveal">
+          <a class="btn btn-accent btn-lg" href="#book">Book a Free Consult</a>
+          <a class="btn btn-ghost btn-lg" href="#experience"><span class="icon-360" aria-hidden="true">360°</span> Try the experience</a>
+        </div>
+        <ul class="trust-line reveal" id="trust-line"></ul>
+      </div>
+
+      <div class="hero-footer wrap">
+        <div class="reel-progress" id="reel-progress" aria-hidden="true"></div>
+        <div class="reel-meta">
+          <span class="reel-label" id="reel-label"></span>
+          <button class="reel-toggle" id="reel-toggle" aria-label="Pause background video">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path class="i-pause" d="M7 5h3v14H7zM14 5h3v14h-3z"/><path class="i-play" d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ OFFER BAR ============ -->
+    <div class="offer-bar" id="offer-bar" hidden>
+      <div class="wrap offer-inner">
+        <span class="offer-dot" aria-hidden="true"></span>
+        <p id="offer-text"></p>
+        <a href="#book" class="offer-link">Claim a spot →</a>
+      </div>
+    </div>
+
+    <!-- ============ PROOF / VALUE STRIP ============ -->
+    <section class="proof" aria-label="Why aerial media">
+      <div class="wrap proof-grid">
+        <div class="proof-item reveal">
+          <span class="proof-num">#1</span>
+          <p>Photos are the most valuable feature on real estate websites, according to buyers in NAR's 2025 Profile of Home Buyers &amp; Sellers.</p>
+        </div>
+        <div class="proof-item reveal">
+          <span class="proof-num">24<small>hr</small></span>
+          <p>Aerial photo delivery, so your listing goes live while it's still news.</p>
+        </div>
+        <div class="proof-item reveal">
+          <span class="proof-num">360°</span>
+          <p>Interactive flights that let buyers look around, not just scroll past.</p>
+        </div>
+        <div class="proof-item reveal">
+          <span class="proof-num">3D</span>
+          <p>Digital twins of homes and sites that people can spin, explore, and share.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 3D MODEL ============ -->
+    <section class="model-section" id="model" aria-labelledby="model-title">
+      <div class="wrap model-grid">
+        <div class="model-copy">
+          <p class="eyebrow reveal">Digital Twin</p>
+          <h2 id="model-title" class="section-title reveal">Walk around the property before you ever arrive.</h2>
+          <p class="lead reveal">We scan homes, lots, and job sites into accurate 3D models. Buyers explore every angle, out-of-state investors see what they're getting, and your team gets a reference that doesn't fade from memory.</p>
+          <ul class="checklist reveal">
+            <li>Spins on its own. Drag to explore any angle</li>
+            <li>Embeds on listing pages and project portals</li>
+            <li>Built from real photogrammetry, not renderings</li>
+          </ul>
+          <a class="btn btn-outline reveal" href="#book">Ask about 3D scans</a>
+        </div>
+        <div class="model-stage reveal" id="model-stage">
+          <div class="model-canvas" id="model-canvas" role="img" aria-label="Rotating 3D model of a house"></div>
+          <div class="model-hud" aria-hidden="true">
+            <span class="hud-dot"></span> Live 3D · drag to explore
+          </div>
+          <div class="scan-ring" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PORTFOLIO ============ -->
+    <section class="work" id="work" aria-labelledby="work-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow reveal">Selected Work</p>
+            <h2 id="work-title" class="section-title reveal">Every place has a best angle.</h2>
+          </div>
+          <div class="filters reveal" role="tablist" aria-label="Filter portfolio">
+            <button class="chip is-active" data-filter="all" role="tab" aria-selected="true">All</button>
+            <button class="chip" data-filter="realestate" role="tab" aria-selected="false">Real Estate</button>
+            <button class="chip" data-filter="construction" role="tab" aria-selected="false">Construction</button>
+            <button class="chip" data-filter="business" role="tab" aria-selected="false">Business</button>
+            <button class="chip" data-filter="land" role="tab" aria-selected="false">Land</button>
+          </div>
+        </div>
+        <div class="gallery" id="gallery"></div>
+      </div>
+    </section>
+
+    <!-- ============ 360 EXPERIENCE ============ -->
+    <section class="experience" id="experience" aria-labelledby="exp-title">
+      <div class="wrap">
+        <div class="section-head centered">
+          <p class="eyebrow reveal">Immersive 360°</p>
+          <h2 id="exp-title" class="section-title reveal">Don't watch the flight. <em>Take it.</em></h2>
+          <p class="lead reveal">Drag, swipe, or turn your phone. You're in the air now.</p>
+        </div>
+
+        <div class="pano reveal" id="pano">
+          <div class="pano-canvas" id="pano-canvas"></div>
+          <div class="pano-hint" id="pano-hint">
+            <svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true"><path d="M8 24h32M14 18l-6 6 6 6M34 18l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Drag to look around</span>
+          </div>
+          <button class="pano-start" id="pano-start">
+            <span class="pano-start-ring" aria-hidden="true"></span>
+            <span class="pano-start-label">Enter 360°</span>
+          </button>
+          <div class="pano-controls" id="pano-controls">
+            <button class="pano-btn" id="pano-play" aria-label="Pause 360 video">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path class="i-pause" d="M7 5h3v14H7zM14 5h3v14h-3z"/><path class="i-play" d="M8 5v14l11-7z"/></svg>
+            </button>
+            <button class="pano-btn" id="pano-mute" aria-label="Unmute">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path class="i-waves" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path class="i-x" d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </button>
+            <button class="pano-btn" id="pano-gyro" aria-label="Use phone motion" hidden>
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="18" r="1" fill="currentColor"/></svg>
+            </button>
+            <button class="pano-btn" id="pano-full" aria-label="Full screen">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </button>
+            <span class="pano-now" id="pano-now"></span>
+          </div>
+        </div>
+        <div class="pano-list" id="pano-list" role="list"></div>
+      </div>
+    </section>
+
+    <!-- ============ BEFORE / AFTER ============ -->
+    <section class="compare-section" aria-labelledby="compare-title">
+      <div class="wrap compare-grid">
+        <div>
+          <p class="eyebrow reveal">The Difference</p>
+          <h2 id="compare-title" class="section-title reveal">Same house. Different buyer reaction.</h2>
+          <p class="lead reveal">A curb photo shows a building. An aerial shows a lifestyle: the lot, the view, the neighborhood, the mountains out back. Slide to see what your listing is missing.</p>
+        </div>
+        <div class="compare reveal" id="compare" style="--pos:50%">
+          <div class="compare-img compare-after" id="compare-after"><span class="compare-tag">Skyline 360 aerial</span></div>
+          <div class="compare-img compare-before" id="compare-before"><span class="compare-tag">Phone photo from the curb</span></div>
+          <div class="compare-handle" aria-hidden="true"><span></span></div>
+          <input type="range" min="0" max="100" value="50" class="compare-range" id="compare-range" aria-label="Compare ground photo and aerial photo">
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SERVICES & PRICING ============ -->
+    <section class="services" id="services" aria-labelledby="services-title">
+      <div class="wrap">
+        <div class="section-head centered">
+          <p class="eyebrow reveal">Services &amp; Packages</p>
+          <h2 id="services-title" class="section-title reveal">Pick the story your property deserves.</h2>
+          <p class="lead reveal">Transparent pricing. Free weather reschedules. No surprises.</p>
+        </div>
+
+        <div class="packages" id="packages"></div>
+
+        <div class="service-cards">
+          <article class="service-card reveal">
+            <h3>Builders &amp; Construction</h3>
+            <p>Monthly progress flights from the same angles every visit, completion films, and time-lapse compilations for owners, lenders, and investors.</p>
+            <p class="service-price">From $449 / month</p>
+          </article>
+          <article class="service-card reveal">
+            <h3>Businesses &amp; Venues</h3>
+            <p>Brand films, FPV fly-throughs, and social content packs for storefronts, resorts, venues, and vacation rentals.</p>
+            <p class="service-price">From $599</p>
+          </article>
+          <article class="service-card reveal">
+            <h3>Add to any package</h3>
+            <p>Twilight session · FPV indoor fly-through · 360° tour · Polycam 3D model · property line overlay · rush delivery.</p>
+            <p class="service-price">From $49</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROCESS ============ -->
+    <section class="process" aria-labelledby="process-title">
+      <div class="wrap">
+        <h2 id="process-title" class="section-title centered reveal">Booked to posted in three steps.</h2>
+        <ol class="steps">
+          <li class="step reveal">
+            <span class="step-num">01</span>
+            <h3>Book in two minutes</h3>
+            <p>Tell us the address and what you need. We confirm airspace and send a prep checklist.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step-num">02</span>
+            <h3>We fly the best light</h3>
+            <p>Planned shots, safe flights, and weather monitoring. You don't need to be there.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step-num">03</span>
+            <h3>Post it fast</h3>
+            <p>Edited media delivered in 24–72 hours, sized for the MLS, your website, and social media.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ TESTIMONIALS ============ -->
+    <section class="testimonials" aria-labelledby="t-title">
+      <div class="wrap">
+        <h2 id="t-title" class="section-title centered reveal">What clients say</h2>
+        <div class="t-grid" id="testimonials"></div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="about" id="about" aria-labelledby="about-title">
+      <div class="wrap about-grid">
+        <figure class="about-photo reveal" id="about-photo">
+          <div class="about-photo-fallback" aria-hidden="true"><span>Your photo</span></div>
+        </figure>
+        <div class="about-copy">
+          <p class="eyebrow reveal">Meet Your Pilot</p>
+          <h2 id="about-title" class="section-title reveal"></h2>
+          <p class="about-role reveal" id="about-role"></p>
+          <div id="about-bio" class="about-bio reveal"></div>
+          <ul class="badges reveal" id="about-badges"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="faq" id="faq" aria-labelledby="faq-title">
+      <div class="wrap faq-grid">
+        <div>
+          <p class="eyebrow reveal">FAQ</p>
+          <h2 id="faq-title" class="section-title reveal">Questions, answered.</h2>
+          <p class="lead reveal">Still wondering about something? Ask it in your consult. It's free.</p>
+        </div>
+        <div class="faq-list" id="faq-list"></div>
+      </div>
+    </section>
+
+    <!-- ============ BOOKING ============ -->
+    <section class="book" id="book" aria-labelledby="book-title">
+      <div class="wrap book-grid">
+        <div class="book-copy">
+          <p class="eyebrow reveal">Free 15-Minute Consultation</p>
+          <h2 id="book-title" class="section-title reveal">Let's make your property the one people remember.</h2>
+          <ul class="checklist reveal">
+            <li>No cost, no obligation</li>
+            <li>Custom shot plan for your property</li>
+            <li>Reply within 24 hours</li>
+          </ul>
+          <a class="btn btn-outline reveal" id="booking-link" href="#" target="_blank" rel="noopener" hidden>Or pick a time on my calendar →</a>
+          <div class="contact-direct reveal" id="contact-direct"></div>
+        </div>
+
+        <form class="book-form reveal" id="book-form" novalidate>
+          <div class="form-step is-active" data-step="1">
+            <p class="form-kicker">Step 1 of 2</p>
+            <h3>What do you want to show off?</h3>
+            <div class="choice-grid" role="group" aria-label="Service type">
+              <label class="choice"><input type="checkbox" name="service" value="Real estate listing"><span>Real estate listing</span></label>
+              <label class="choice"><input type="checkbox" name="service" value="Construction progress"><span>Construction progress</span></label>
+              <label class="choice"><input type="checkbox" name="service" value="Business / venue"><span>Business / venue</span></label>
+              <label class="choice"><input type="checkbox" name="service" value="360 experience"><span>360° experience</span></label>
+              <label class="choice"><input type="checkbox" name="service" value="3D model"><span>3D model</span></label>
+              <label class="choice"><input type="checkbox" name="service" value="Not sure yet"><span>Not sure yet</span></label>
+            </div>
+            <button type="button" class="btn btn-accent btn-block" data-next>Continue</button>
+          </div>
+
+          <div class="form-step" data-step="2">
+            <p class="form-kicker">Step 2 of 2</p>
+            <h3>Where should we send your shot plan?</h3>
+            <div class="field-row">
+              <label class="field"><span>Name</span><input type="text" name="name" autocomplete="name" required></label>
+              <label class="field"><span>Email</span><input type="email" name="email" autocomplete="email" required></label>
+            </div>
+            <div class="field-row">
+              <label class="field"><span>Phone <em>(optional)</em></span><input type="tel" name="phone" autocomplete="tel"></label>
+              <label class="field"><span>Property city</span><input type="text" name="city" placeholder="e.g. Lehi"></label>
+            </div>
+            <label class="field"><span>Anything we should know? <em>(optional)</em></span><textarea name="message" rows="3" placeholder="Listing date, property size, deadlines…"></textarea></label>
+            <input type="text" name="company_website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <div class="form-actions">
+              <button type="button" class="btn btn-ghost" data-back>Back</button>
+              <button type="submit" class="btn btn-accent">Get My Free Consult</button>
+            </div>
+            <p class="form-note">Your info is only used to reply to you. Never shared.</p>
+          </div>
+
+          <div class="form-step form-done" data-step="done">
+            <h3>You're on the schedule list.</h3>
+            <p>I'll reach out within 24 hours with next steps and a custom shot plan.</p>
+          </div>
+          <p class="form-error" id="form-error" role="alert" hidden></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <img src="assets/brand/logo.svg" alt="Skyline 360" class="footer-logo">
+        <p class="footer-tag" id="footer-tag"></p>
+      </div>
+      <div class="footer-links">
+        <a href="#work">Work</a>
+        <a href="#experience">360° Experience</a>
+        <a href="#services">Services</a>
+        <a href="#faq">FAQ</a>
+        <a href="#book">Book</a>
+      </div>
+      <div class="footer-contact" id="footer-contact"></div>
+    </div>
+    <div class="wrap footer-base">
+      <p id="footer-legal"></p>
+      <p id="footer-compliance" hidden>All flights conducted under FAA Part 107.</p>
+    </div>
+  </footer>
+
+  <!-- Mobile sticky CTA -->
+  <div class="sticky-cta" id="sticky-cta">
+    <a class="btn btn-accent btn-block" href="#book">Book a Free Consult</a>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lightbox-close" aria-label="Close">×</button>
+    <img alt="" id="lightbox-img">
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+  <script type="module" src="js/house3d.js"></script>
+  <script type="module" src="js/pano360.js"></script>
+</body>
+</html>

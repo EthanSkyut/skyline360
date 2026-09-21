@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 530 140" role="img" aria-label="Skyline 360">
+  <!-- Placeholder mark for Skyline 360: a 360 ring enclosing a Wasatch ridgeline.
+       Replace with the real logo export (Save As > Plain SVG, transparent background). -->
+  <defs>
+    <clipPath id="sl-ring-inner"><circle cx="70" cy="70" r="44"/></clipPath>
+  </defs>
+  <circle cx="70" cy="70" r="48" fill="none" stroke="#ffffff" stroke-width="8"/>
+  <path clip-path="url(#sl-ring-inner)" fill="#ffffff"
+        d="M4 130 L30 104 L52 74 L70 98 L88 70 L108 96 L136 130 Z"/>
+  <text x="152" y="82" fill="#ffffff"
+        font-family="'Jost','Century Gothic','Futura','Avenir Next','Segoe UI',sans-serif"
+        font-size="34" font-weight="300" letter-spacing="12">SKYLINE 360</text>
+</svg>

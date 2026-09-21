@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" role="img" aria-label="Skyline 360">
+  <defs>
+    <clipPath id="sl-mark-inner"><circle cx="70" cy="70" r="44"/></clipPath>
+  </defs>
+  <circle cx="70" cy="70" r="48" fill="none" stroke="#ffffff" stroke-width="8"/>
+  <path clip-path="url(#sl-mark-inner)" fill="#ffffff"
+        d="M4 130 L30 104 L52 74 L70 98 L88 70 L108 96 L136 130 Z"/>
+</svg>
