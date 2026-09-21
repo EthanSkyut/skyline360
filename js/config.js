@@ -82,6 +82,7 @@ window.SKYLINE_CONFIG = {
     photo: "assets/about/ethan.jpg",
     name: "Ethan Daugherty",
     role: "Founder · FAA Part 107 Pilot",
+    roleUncertified: "Founder · Aerial Filmmaker",   // shown instead while part107 is false
     // TODO: rewrite in your own voice. Keep it short, specific, and local.
     bio: [
       "I started Skyline 360 because I kept seeing incredible Utah properties marketed with phone photos taken from the curb. The view from above tells the story a listing can't: the mountains behind it, the lot, the neighborhood, the light at golden hour.",

@@ -456,7 +456,7 @@
   /* ---------------- About ---------------- */
   const a = C.about;
   $("#about-title").textContent = `Hi, I'm ${a.name.split(" ")[0]}.`;
-  $("#about-role").textContent = a.role;
+  $("#about-role").textContent = b.part107 ? a.role : (a.roleUncertified || "Founder");
   a.bio.forEach((p) => $("#about-bio").append(el("p", null, p)));
   a.credentials
     .filter((c) => (b.part107 || !/part 107/i.test(c)) && (b.insured || !/insured/i.test(c)))
