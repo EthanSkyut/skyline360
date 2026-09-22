@@ -15,6 +15,7 @@ if (cfg.polycamEmbedUrl) {
   frame.allow = "fullscreen; xr-spatial-tracking";
   mount.append(frame);
   stage.querySelector(".scan-ring")?.remove();
+  stage.querySelector("#model-zoom")?.remove();
 } else {
   initViewer();
 }
@@ -65,23 +66,43 @@ function initViewer() {
   controls.enableDamping = true;
   controls.dampingFactor = 0.06;
   controls.enablePan = false;
+  // Wheel/pinch zoom is off so hovering the model while scrolling the page
+  // doesn't get hijacked -- zoom is exposed instead through the explicit
+  // +/- buttons below, which dolly the camera by hand.
   controls.enableZoom = false;
+  controls.minDistance = 9;
+  controls.maxDistance = 42;
   controls.autoRotate = true;
   controls.autoRotateSpeed = (cfg.rotationSpeed ?? 0.6) * 2;
   controls.minPolarAngle = 0.35;
   controls.maxPolarAngle = Math.PI / 2.1;
   controls.update();
+
   // Spin on its own; pause the moment someone grabs it, resume a few seconds
   // after they let go (matches how most product-style 3D viewers behave).
   let resumeTimer = null;
+  const pauseThenResume = () => {
+    controls.autoRotate = false;
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => { controls.autoRotate = true; }, 4000);
+  };
   controls.addEventListener("start", () => {
     controls.autoRotate = false;
     clearTimeout(resumeTimer);
   });
-  controls.addEventListener("end", () => {
-    clearTimeout(resumeTimer);
-    resumeTimer = setTimeout(() => { controls.autoRotate = true; }, 4000);
-  });
+  controls.addEventListener("end", pauseThenResume);
+
+  const zoomWrap = document.getElementById("model-zoom");
+  zoomWrap.hidden = false;
+  const dolly = (factor) => {
+    const offset = camera.position.clone().sub(controls.target);
+    const dist = THREE.MathUtils.clamp(offset.length() * factor, controls.minDistance, controls.maxDistance);
+    camera.position.copy(controls.target).addScaledVector(offset.normalize(), dist);
+    controls.update();
+    pauseThenResume();
+  };
+  document.getElementById("model-zoom-in").addEventListener("click", () => dolly(0.8));
+  document.getElementById("model-zoom-out").addEventListener("click", () => dolly(1.25));
   // Let vertical swipes keep scrolling the page on phones; horizontal drags rotate.
   renderer.domElement.style.touchAction = "pan-y";
 

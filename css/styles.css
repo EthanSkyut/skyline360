@@ -256,6 +256,14 @@ section { position: relative; }
   animation: scan 4s ease-in-out infinite;
 }
 @keyframes scan { 0%, 100% { opacity: 0.15; transform: translateX(-50%) scale(0.9); } 50% { opacity: 0.6; transform: translateX(-50%) scale(1.05); } }
+.model-zoom { position: absolute; right: 16px; bottom: 16px; display: flex; flex-direction: column; gap: 8px; }
+.model-zoom-btn {
+  width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(0,0,0,0.45); backdrop-filter: blur(6px); color: #fff; cursor: pointer; display: grid; place-items: center;
+  transition: background-color .2s, transform .15s;
+}
+.model-zoom-btn:hover { background: rgba(0,0,0,0.65); }
+.model-zoom-btn:active { transform: scale(0.92); }
 
 /* ---------- Event filming ---------- */
 .event-grid { display: grid; grid-template-columns: 1.1fr 0.8fr; gap: clamp(32px, 6vw, 80px); align-items: center; }
