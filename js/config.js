@@ -71,8 +71,9 @@ window.SKYLINE_CONFIG = {
   eventReel: {
     clips: [
       { src: "assets/video/event/event-01.mp4", label: "Splash Summit — Provo" },
-      { src: "assets/video/event/event-02.mp4", label: "Oregon coast, golden hour" },
-      { src: "assets/video/event/event-03.mp4", label: "Temple grounds — Oregon" },
+      { src: "assets/video/event/event-02.mp4", label: "Splash Summit — Provo" },
+      { src: "assets/video/event/event-03.mp4", label: "Splash Summit — Provo" },
+      { src: "assets/video/event/event-04.mp4", label: "Festival of Colors" },
     ],
   },
 
