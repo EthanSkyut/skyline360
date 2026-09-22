@@ -103,6 +103,10 @@
     v.setAttribute("playsinline", "");
     v.preload = "auto";
     if (C.heroReel.poster) v.poster = C.heroReel.poster;
+    // Show the poster frame the instant it paints, so real footage (even just
+    // its still poster) is the first thing visible -- no placeholder flash
+    // while the first clip is still downloading.
+    v.classList.add("is-visible");
     heroMedia.append(v);
     return v;
   });
