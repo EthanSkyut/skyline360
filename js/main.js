@@ -55,7 +55,7 @@
       nodes.push(phone);
     }
     if (b.instagram) {
-      const ig = el("a", null, `@${b.instagram}`);
+      const ig = el("a", null, `Insta: @${b.instagram}`);
       ig.href = `https://www.instagram.com/${b.instagram}/`;
       ig.target = "_blank";
       ig.rel = "noopener";
@@ -94,7 +94,8 @@
     return i.firstChild;
   });
 
-  const placeholder = createCityFlyover($("#hero-placeholder"));
+  const placeholderCanvas = $("#hero-placeholder");
+  const placeholder = createCityFlyover(placeholderCanvas);
   const vids = [0, 1].map(() => {
     const v = document.createElement("video");
     v.muted = true;
@@ -147,6 +148,7 @@
       activeVid = 1 - activeVid;
       setLabel(i);
       placeholder.stop();
+      placeholderCanvas.classList.add("is-hidden");
       outgoing.classList.remove("is-visible");
       setTimeout(() => {
         outgoing.pause();
@@ -184,6 +186,7 @@
 
   function startPlaceholderCycle() {
     if (usingPlaceholder) return;
+    placeholderCanvas.classList.remove("is-hidden");
     usingPlaceholder = true;
     bars.forEach((bar) => { bar.parentElement.hidden = false; });
     current = 0;
@@ -388,6 +391,13 @@
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !lightbox.hidden) closeLightbox(); });
 
   /* ---------------- Before / after ---------------- */
+  // No real ground/aerial pair shot yet -- hide the whole section rather than
+  // show the procedural placeholder pair as if it were a real comparison.
+  // Remove this guard (and set compare.enabled: true in config.js) once real
+  // photos are in.
+  if (!C.compare.enabled) {
+    $("#compare-section").hidden = true;
+  }
   const compare = $("#compare");
   const range = $("#compare-range");
   range.addEventListener("input", () => compare.style.setProperty("--pos", `${range.value}%`));
@@ -401,6 +411,62 @@
   };
   setCompareImage($("#compare-before"), C.compare.before, groundSvg());
   setCompareImage($("#compare-after"), C.compare.after, aerialSvg());
+
+  /* ---------------- Event filming (vertical reel) ---------------- */
+  // A lighter cousin of the hero reel: two video layers crossfading through
+  // a short clip list in a tall box. The section stays hidden until the
+  // first clip actually loads, so a missing file never shows a broken box.
+  (function initEventReel() {
+    const eClips = C.eventReel?.clips || [];
+    if (!eClips.length) return;
+    const section = $("#event-section");
+    const mount = $("#event-media");
+    const nowLabel = $("#event-now");
+    const evVids = [0, 1].map(() => {
+      const v = document.createElement("video");
+      v.muted = true; v.playsInline = true; v.setAttribute("playsinline", "");
+      v.preload = "auto";
+      mount.append(v);
+      return v;
+    });
+    let evCurrent = -1, evActive = 1, evShown = false;
+    const EV_FADE_MS = 600, EV_HOLD_MS = 220;
+
+    function evPlay(i) {
+      const incoming = evVids[1 - evActive];
+      const outgoing = evVids[evActive];
+      const onReady = () => {
+        cleanup();
+        if (!evShown) { evShown = true; section.hidden = false; }
+        evCurrent = i;
+        evActive = 1 - evActive;
+        nowLabel.textContent = eClips[i]?.label || "";
+        outgoing.classList.remove("is-visible");
+        setTimeout(() => {
+          outgoing.pause();
+          incoming.play().catch(() => {});
+          incoming.classList.add("is-visible");
+        }, EV_FADE_MS + EV_HOLD_MS);
+      };
+      const onError = () => cleanup();
+      const cleanup = () => {
+        incoming.removeEventListener("canplay", onReady);
+        incoming.removeEventListener("error", onError);
+      };
+      incoming.addEventListener("canplay", onReady, { once: true });
+      incoming.addEventListener("error", onError, { once: true });
+      incoming.src = eClips[i].src;
+      incoming.currentTime = 0;
+      incoming.load();
+    }
+    evVids.forEach((v) => {
+      v.addEventListener("ended", () => {
+        if (v !== evVids[evActive]) return;
+        evPlay((evCurrent + 1) % eClips.length);
+      });
+    });
+    evPlay(0);
+  })();
 
   function groundSvg() {
     return `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600' preserveAspectRatio='xMidYMid slice'>

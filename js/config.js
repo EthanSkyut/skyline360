@@ -30,17 +30,20 @@ window.SKYLINE_CONFIG = {
     text: "Founding Client Offer — the first 10 Utah agents get a Signature Listing at Essentials pricing.",
   },
 
-  // HERO REEL — short clips (6–12 s each), landscape, muted. They crossfade in order, forever.
+  // HERO REEL — short clips, landscape, muted, dip-to-black between shots.
+  // Order: Utah opener, real estate up front (the core business), scenic
+  // variety, then the dancing sequence as a closing, memorable beat.
   heroReel: {
     poster: "assets/video/reel/poster.jpg",
     clips: [
-      { src: "assets/video/reel/reel-01.mp4", label: "Waterfall canyon — Oregon Coast Range" },
-      { src: "assets/video/reel/reel-02.mp4", label: "River crossing — Columbia River Gorge" },
-      { src: "assets/video/reel/reel-03.mp4", label: "Shoshone Falls — Twin Falls, ID" },
-      { src: "assets/video/reel/reel-04.mp4", label: "Devil's Kitchen — Central Utah" },
-      { src: "assets/video/reel/reel-05.mp4", label: "Hillside lot — Utah County" },
-      { src: "assets/video/reel/reel-06.mp4", label: "Alpine ridgeline — Lone Peak Wilderness" },
+      { src: "assets/video/reel/reel-01.mp4", label: "Pfeifferhorn — Lone Peak Wilderness" },
+      { src: "assets/video/reel/reel-02.mp4", label: "Hillside lot — Utah County" },
+      { src: "assets/video/reel/reel-03.mp4", label: "Devil's Kitchen — Central Utah" },
+      { src: "assets/video/reel/reel-04.mp4", label: "Forest road — Oregon Coast Range" },
+      { src: "assets/video/reel/reel-05.mp4", label: "Shoshone Falls — Twin Falls, ID" },
+      { src: "assets/video/reel/reel-06.mp4", label: "Golden hour — Oregon Coast" },
       { src: "assets/video/reel/reel-07.mp4", label: "Golden hour — Oregon Coast" },
+      { src: "assets/video/reel/reel-08.mp4", label: "Golden hour — Oregon Coast" },
     ],
   },
 
@@ -53,14 +56,28 @@ window.SKYLINE_CONFIG = {
   },
 
   // 360° VIDEOS — equirectangular MP4 exports from your Avata 360.
-  pano360: [
-    { src: "assets/video/360/flight-01.mp4", title: "Lakefront sunrise", location: "Utah Lake" },
-    { src: "assets/video/360/flight-02.mp4", title: "Canyon estate", location: "Provo Canyon" },
-    { src: "assets/video/360/flight-03.mp4", title: "Neighborhood overview", location: "Lehi" },
-  ],
+  // Empty on purpose: no real 360 footage shot yet, so the whole "Immersive
+  // 360°" section stays hidden (see js/pano360.js) rather than show the
+  // procedural placeholder sphere as if it were real. Add entries here to
+  // bring the section back.
+  pano360: [],
+  // Kept here (commented) for when real clips are ready:
+  // { src: "assets/video/360/flight-01.mp4", title: "Lakefront sunrise", location: "Utah Lake" },
+
+  // EVENT FILMING — vertical clips (social-format), cycled in a tall box.
+  // The whole section stays hidden while this is empty.
+  eventReel: {
+    clips: [
+      { src: "assets/video/event/event-01.mp4", label: "Splash Summit — Provo" },
+      { src: "assets/video/event/event-02.mp4", label: "Oregon coast, golden hour" },
+    ],
+  },
 
   // BEFORE / AFTER — same property, ground level vs. aerial.
+  // enabled: false hides the whole section (no real ground/aerial pair shot
+  // yet) rather than show the procedural placeholder as if it were real.
   compare: {
+    enabled: false,
     before: "assets/photos/compare-ground.jpg",
     after: "assets/photos/compare-aerial.jpg",
     beforeLabel: "Phone photo from the curb",

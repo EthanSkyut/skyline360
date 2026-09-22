@@ -71,6 +71,17 @@ function initViewer() {
   controls.minPolarAngle = 0.35;
   controls.maxPolarAngle = Math.PI / 2.1;
   controls.update();
+  // Spin on its own; pause the moment someone grabs it, resume a few seconds
+  // after they let go (matches how most product-style 3D viewers behave).
+  let resumeTimer = null;
+  controls.addEventListener("start", () => {
+    controls.autoRotate = false;
+    clearTimeout(resumeTimer);
+  });
+  controls.addEventListener("end", () => {
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => { controls.autoRotate = true; }, 4000);
+  });
   // Let vertical swipes keep scrolling the page on phones; horizontal drags rotate.
   renderer.domElement.style.touchAction = "pan-y";
 
@@ -88,6 +99,7 @@ function initViewer() {
       model.traverse((o) => {
         if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; }
       });
+      levelModel(model);
       const box = new THREE.Box3().setFromObject(model);
       const size = box.getSize(new THREE.Vector3());
       const center = box.getCenter(new THREE.Vector3());
@@ -123,6 +135,58 @@ function initViewer() {
     controls.update(dt);
     renderer.render(scene, camera);
   });
+}
+
+// Photogrammetry scans aren't always perfectly level -- fit a plane to the
+// lowest quarter of the mesh (the ground/rooftops) and rotate the model so
+// that plane's normal points straight up. Runs before the existing
+// bounding-box scale/center step, so that step centers the already-leveled
+// geometry rather than the tilted original.
+function levelModel(model) {
+  model.updateWorldMatrix(true, true);
+  const box = new THREE.Box3().setFromObject(model);
+  const groundY = box.min.y + (box.max.y - box.min.y) * 0.25;
+  const pts = [];
+  const v = new THREE.Vector3();
+  model.traverse((o) => {
+    if (!o.isMesh) return;
+    const pos = o.geometry?.attributes?.position;
+    if (!pos) return;
+    const step = Math.max(1, Math.floor(pos.count / 4000));
+    for (let i = 0; i < pos.count; i += step) {
+      v.fromBufferAttribute(pos, i).applyMatrix4(o.matrixWorld);
+      if (v.y <= groundY) pts.push(v.x, v.y, v.z);
+    }
+  });
+  if (pts.length < 90) return;
+
+  let sx = 0, sz = 0, sy = 0, sxx = 0, szz = 0, sxz = 0, sxy = 0, szy = 0, n = 0;
+  for (let i = 0; i < pts.length; i += 3) {
+    const x = pts[i], y = pts[i + 1], z = pts[i + 2];
+    sx += x; sz += z; sy += y; sxx += x * x; szz += z * z; sxz += x * z; sxy += x * y; szy += z * y; n++;
+  }
+  // Least-squares fit of y = a*x + b*z + c.
+  const sol = solve3x3(
+    [[sxx, sxz, sx], [sxz, szz, sz], [sx, sz, n]],
+    [sxy, szy, sy]
+  );
+  if (!sol) return;
+  const [a, b] = sol;
+  const normal = new THREE.Vector3(-a, 1, -b).normalize();
+  const quat = new THREE.Quaternion().setFromUnitVectors(normal, new THREE.Vector3(0, 1, 0));
+  model.quaternion.copy(quat);
+}
+
+function solve3x3(m, b) {
+  const det = (r) => (
+    r[0][0] * (r[1][1] * r[2][2] - r[1][2] * r[2][1]) -
+    r[0][1] * (r[1][0] * r[2][2] - r[1][2] * r[2][0]) +
+    r[0][2] * (r[1][0] * r[2][1] - r[1][1] * r[2][0])
+  );
+  const d = det(m);
+  if (Math.abs(d) < 1e-9) return null;
+  const replace = (col) => m.map((row, i) => row.map((val, j) => (j === col ? b[i] : val)));
+  return [det(replace(0)) / d, det(replace(1)) / d, det(replace(2)) / d];
 }
 
 function buildHouse() {

@@ -2,6 +2,16 @@ import * as THREE from "three";
 
 const items = window.SKYLINE_CONFIG.pano360 || [];
 const pano = document.getElementById("pano");
+
+// No real 360 footage shot yet -- hide the whole section rather than show the
+// procedural placeholder sphere as if it were a real tour. Remove this guard
+// (and the `pano360: []` override in config.js) once real clips are in.
+if (!items.length) {
+  document.getElementById("experience")?.setAttribute("hidden", "");
+  // Also hide every nav link / CTA that points at the now-hidden section
+  // (desktop nav, mobile nav, hero CTA, footer) so nothing links to a dead anchor.
+  document.querySelectorAll('a[href="#experience"]').forEach((a) => { a.hidden = true; });
+}
 const mount = document.getElementById("pano-canvas");
 const startBtn = document.getElementById("pano-start");
 const hint = document.getElementById("pano-hint");
