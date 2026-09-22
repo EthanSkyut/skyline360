@@ -34,11 +34,13 @@ window.SKYLINE_CONFIG = {
   heroReel: {
     poster: "assets/video/reel/poster.jpg",
     clips: [
-      { src: "assets/video/reel/reel-01.mp4", label: "Twilight estate — Alpine" },
-      { src: "assets/video/reel/reel-02.mp4", label: "FPV fly-through — Lehi" },
-      { src: "assets/video/reel/reel-03.mp4", label: "New community — Saratoga Springs" },
-      { src: "assets/video/reel/reel-04.mp4", label: "Mountain property — Park City" },
-      { src: "assets/video/reel/reel-05.mp4", label: "Commercial build — Provo" },
+      { src: "assets/video/reel/reel-01.mp4", label: "Waterfall canyon — Oregon Coast Range" },
+      { src: "assets/video/reel/reel-02.mp4", label: "River crossing — Columbia River Gorge" },
+      { src: "assets/video/reel/reel-03.mp4", label: "Shoshone Falls — Twin Falls, ID" },
+      { src: "assets/video/reel/reel-04.mp4", label: "Devil's Kitchen — Central Utah" },
+      { src: "assets/video/reel/reel-05.mp4", label: "Hillside lot — Utah County" },
+      { src: "assets/video/reel/reel-06.mp4", label: "Alpine ridgeline — Lone Peak Wilderness" },
+      { src: "assets/video/reel/reel-07.mp4", label: "Golden hour — Oregon Coast" },
     ],
   },
 
@@ -66,16 +68,16 @@ window.SKYLINE_CONFIG = {
   },
 
   // PORTFOLIO PHOTOS — category must be one of: realestate, construction, business, land
+  // No business-category shots yet (no storefront/venue job to show); add photo-05/-09
+  // back once there's real work, rather than shipping a placeholder.
   photos: [
-    { src: "assets/photos/photo-01.jpg", category: "realestate", alt: "Twilight aerial of a modern home", tall: true },
-    { src: "assets/photos/photo-02.jpg", category: "realestate", alt: "Backyard pool from above" },
-    { src: "assets/photos/photo-03.jpg", category: "construction", alt: "Commercial build progress aerial" },
-    { src: "assets/photos/photo-04.jpg", category: "land", alt: "Mountain acreage at golden hour", tall: true },
-    { src: "assets/photos/photo-05.jpg", category: "business", alt: "Storefront and parking lot aerial" },
-    { src: "assets/photos/photo-06.jpg", category: "realestate", alt: "Neighborhood context shot" },
-    { src: "assets/photos/photo-07.jpg", category: "construction", alt: "New subdivision roads and lots" },
-    { src: "assets/photos/photo-08.jpg", category: "land", alt: "Canyon road top-down" },
-    { src: "assets/photos/photo-09.jpg", category: "business", alt: "Event venue from above", tall: true },
+    { src: "assets/photos/photo-01.jpg", category: "land", alt: "Utah County hillside overlooking the valley", tall: true },
+    { src: "assets/photos/photo-02.jpg", category: "realestate", alt: "Terraced hillside lot with new construction" },
+    { src: "assets/photos/photo-03.jpg", category: "construction", alt: "Finished steel outbuilding, Bluffdale" },
+    { src: "assets/photos/photo-04.jpg", category: "land", alt: "Tree canopy over the valley toward the Wasatch Range", tall: true },
+    { src: "assets/photos/photo-06.jpg", category: "realestate", alt: "Brick home aerial with mountain backdrop" },
+    { src: "assets/photos/photo-07.jpg", category: "construction", alt: "Outbuilding aerial, Bluffdale property" },
+    { src: "assets/photos/photo-08.jpg", category: "land", alt: "Cul-de-sac lot ready for a buyer" },
   ],
 
   about: {

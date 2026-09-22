@@ -130,6 +130,13 @@
     playClip(n);
   }
 
+  // Dip-to-black between shots (not a crossfade): the outgoing clip fades out,
+  // the screen holds black for a beat, then the incoming clip fades in — the
+  // cut style real estate and brand reels use, rather than two clips dissolving
+  // into each other. FADE_MS must match the CSS `.hero-media video` transition.
+  const FADE_MS = 600;
+  const HOLD_MS = 220;
+
   function playClip(i) {
     const incoming = vids[1 - activeVid];
     const outgoing = vids[activeVid];
@@ -139,11 +146,13 @@
       current = i;
       activeVid = 1 - activeVid;
       setLabel(i);
-      incoming.classList.add("is-visible");
-      outgoing.classList.remove("is-visible");
-      setTimeout(() => outgoing.pause(), 1500);
       placeholder.stop();
-      if (!paused) incoming.play().catch(() => {});
+      outgoing.classList.remove("is-visible");
+      setTimeout(() => {
+        outgoing.pause();
+        if (!paused) incoming.play().catch(() => {});
+        incoming.classList.add("is-visible");
+      }, FADE_MS + HOLD_MS);
     };
     const onError = () => {
       cleanup();
