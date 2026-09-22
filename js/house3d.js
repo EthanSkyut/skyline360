@@ -145,14 +145,19 @@ function initViewer() {
 function levelModel(model) {
   model.updateWorldMatrix(true, true);
   const box = new THREE.Box3().setFromObject(model);
-  const groundY = box.min.y + (box.max.y - box.min.y) * 0.25;
+  // A wider band (e.g. the bottom quarter) pulls in wall/facade points on a
+  // scan this tilted, which biases the fit toward a steeper angle than the
+  // ground actually has -- measured ~14 deg at 25% vs. ~10 deg at 10-12% on
+  // this house's scan, and the tighter band still clears the sample floor
+  // below once the vertex budget is raised to match.
+  const groundY = box.min.y + (box.max.y - box.min.y) * 0.12;
   const pts = [];
   const v = new THREE.Vector3();
   model.traverse((o) => {
     if (!o.isMesh) return;
     const pos = o.geometry?.attributes?.position;
     if (!pos) return;
-    const step = Math.max(1, Math.floor(pos.count / 4000));
+    const step = Math.max(1, Math.floor(pos.count / 20000));
     for (let i = 0; i < pos.count; i += step) {
       v.fromBufferAttribute(pos, i).applyMatrix4(o.matrixWorld);
       if (v.y <= groundY) pts.push(v.x, v.y, v.z);

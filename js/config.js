@@ -38,12 +38,14 @@ window.SKYLINE_CONFIG = {
     clips: [
       { src: "assets/video/reel/reel-01.mp4", label: "Pfeifferhorn — Lone Peak Wilderness" },
       { src: "assets/video/reel/reel-02.mp4", label: "Hillside lot — Utah County" },
-      { src: "assets/video/reel/reel-03.mp4", label: "Devil's Kitchen — Central Utah" },
-      { src: "assets/video/reel/reel-04.mp4", label: "Forest road — Oregon Coast Range" },
-      { src: "assets/video/reel/reel-05.mp4", label: "Shoshone Falls — Twin Falls, ID" },
-      { src: "assets/video/reel/reel-06.mp4", label: "Golden hour — Oregon Coast" },
+      { src: "assets/video/reel/reel-03.mp4", label: "Bluffdale property — Salt Lake County" },
+      { src: "assets/video/reel/reel-04.mp4", label: "Devil's Kitchen — Central Utah" },
+      { src: "assets/video/reel/reel-05.mp4", label: "Forest canopy — Oregon Coast Range" },
+      { src: "assets/video/reel/reel-06.mp4", label: "Shoshone Falls — Twin Falls, ID" },
       { src: "assets/video/reel/reel-07.mp4", label: "Golden hour — Oregon Coast" },
       { src: "assets/video/reel/reel-08.mp4", label: "Golden hour — Oregon Coast" },
+      { src: "assets/video/reel/reel-09.mp4", label: "Golden hour — Oregon Coast" },
+      { src: "assets/video/reel/reel-10.mp4", label: "Festival of Colors" },
     ],
   },
 
@@ -70,6 +72,7 @@ window.SKYLINE_CONFIG = {
     clips: [
       { src: "assets/video/event/event-01.mp4", label: "Splash Summit — Provo" },
       { src: "assets/video/event/event-02.mp4", label: "Oregon coast, golden hour" },
+      { src: "assets/video/event/event-03.mp4", label: "Temple grounds — Utah" },
     ],
   },
 
