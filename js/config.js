@@ -9,7 +9,7 @@ window.SKYLINE_CONFIG = {
     legalName: "Skyline 360 LLC",           // registered entity, shown in the footer
     owner: "Ethan Daugherty",
     tagline: "Aerial cinema for places worth showing off",
-    email: "ethandaugherty03@gmail.com",
+    email: "ethan@skyline360utah.com",
     phone: "",                              // TODO: blank hides it everywhere, so no fake number ships
     instagram: "skyline360utah",
     serviceArea: "Utah County · Salt Lake County · Park City",
